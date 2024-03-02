@@ -1,0 +1,2 @@
+# ignore data folder when uploading to github
+data/
