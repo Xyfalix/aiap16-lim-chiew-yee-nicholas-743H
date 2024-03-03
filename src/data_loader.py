@@ -9,6 +9,4 @@ def load_data():
 
     print("Data loaded successfully:")
 
-    print(data.head())
-
     return data

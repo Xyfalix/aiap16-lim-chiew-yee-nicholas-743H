@@ -1,6 +1,6 @@
 # preprocessor.py
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import LabelEncoder
 import pandas as pd
 import numpy as np
 
@@ -46,15 +46,24 @@ def preprocess_data(data):
     data.loc[:, 'Taken Bronchodilators'] = data['Taken Bronchodilators'].fillna('No')
 
     # Select independent variables to use (X) and dependent variable (y)
-    columns_to_drop = ["Lung Cancer Occurrence", "ID", "Last Weight", "Current Weight", "Start Smoking", "Stop Smoking",  ]
-    X = data.drop(columns_to_drop, axis=1)
+    columns_to_drop = ["Lung Cancer Occurrence", "ID", "Age", "Last Weight", "Current Weight", "Start Smoking", "Stop Smoking", "Frequency of Tiredness", "Dominant Hand"]
+    X = data.drop(columns_to_drop, axis=1, inplace=False)
     y = data["Lung Cancer Occurrence"]
 
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    print("This is the cleaned up data")
+    
 
-    # standardize mean and variance to 0 and 1 respectively
-    scaler = StandardScaler()
-    X_train_scaled = scaler.fit_transform(X_train)
-    X_test_scaled = scaler.transform(X_test)
+    label_encoder = LabelEncoder()
 
-    return X_train_scaled, X_test_scaled, y_train, y_test
+    # Apply LabelEncoder to Air Pollution Exposure which is ordinal
+    X["Air Pollution Exposure"] = label_encoder.fit_transform(X["Air Pollution Exposure"])
+
+    #
+
+    print(X.head())
+
+    return
+    
+    # X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y, random_state=42)
+
+    # return X_train, X_test, y_train, y_test

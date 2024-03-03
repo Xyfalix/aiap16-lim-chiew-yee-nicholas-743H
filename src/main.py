@@ -11,14 +11,14 @@ def main():
     # Preprocess data
     X_train, X_test, y_train, y_test = preprocess_data(data)
 
-    # Train model
-    model = train_model(X_train, y_train)
+    # # Train model
+    # model = train_model(X_train, y_train)
 
-    # Evaluate model
-    evaluate_model(model, X_test, y_test)
+    # # Evaluate model
+    # evaluate_model(model, X_test, y_test)
 
-    # Save the model
-    joblib.dump(model, Config.MODEL_SAVE_PATH)
+    # # Save the model
+    # joblib.dump(model, Config.MODEL_SAVE_PATH)
 
 if __name__ == "__main__":
     main()
