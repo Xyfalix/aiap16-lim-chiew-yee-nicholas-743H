@@ -52,18 +52,24 @@ def preprocess_data(data):
 
     print("This is the cleaned up data")
     
-
     label_encoder = LabelEncoder()
 
     # Apply LabelEncoder to Air Pollution Exposure which is ordinal
     X["Air Pollution Exposure"] = label_encoder.fit_transform(X["Air Pollution Exposure"])
 
-    #
+    # Apply one-hot encoding to other non-ordinal categoral columns
+    X = pd.get_dummies(X, columns=X.select_dtypes(include=['object']).columns)
 
-    print(X.head())
+    # convert true false values to boolean
+    X = X.astype(int)
 
-    return
+    all_columns = X.columns.tolist()
+
+    # Display the list of columns
+    # print(all_columns)
+    # print(X.head())
+    # print(X.describe())
     
-    # X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y, random_state=42)
 
-    # return X_train, X_test, y_train, y_test
+    return X_train, X_test, y_train, y_test
