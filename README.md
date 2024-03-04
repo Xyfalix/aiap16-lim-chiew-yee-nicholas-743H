@@ -79,11 +79,17 @@
 2) Other than that, it has similar advantages to decision trees.
 
 ## Evaluation of Models
+The models are evaluated based on the following criteria
+ 1) Accuracy: Measures how often the classifier correctly predicts. It can give misleading results if the test dataset is imbalanced.
+ 2) Precision: The ratio of true positives to the sum of true positives and false positives. Precision is useful in the cases where false positives are of higher concern than false negatives. e.g similar product recommendations for an e-commerce website
+ 3) Recall (Sensitivity or True Positive Rate): The ratio of true positives to the sum of true positives and false negatives. It measures the ability to capture all relevant instances. This is especially important in medical cases where false negatives are detrimental as it translates to cases such as undetected cases of cancer.
 ### Decision Tree
 ### 1st iteration (No optimization)
 - Training Model Accuracy: 91.2%
 - Test Data Accuracy: 63.5%
-- From this data, overfitting had likely occurred, and certain parameters (termed as hyperparameters) have to be tuned in order to reduce overfitting. From my understanding, 3 hyperparameters can be tuned to reduce overfitting, namely:
+- Precision Score: 67.2%
+- Recall Score: 64.3%
+- From this data, overfitting had likely occurred (training model accuracy significantly higher than test data accuracy), and certain parameters (termed as hyperparameters) have to be tuned in order to reduce overfitting. From my understanding, 3 hyperparameters can be tuned to reduce overfitting, namely:
   1) No maximum depth. This causes the model to fit too well to the training data, capturing noise and outliers.
   2) Small minimum samples per leaf which results in leaf nodes too specific to the training data
   3) Too few samples per split which could cause the tree to split when noise is occurred insted of legitimate patterns.
@@ -91,28 +97,36 @@
 ### 2nd iteration (Optimization done)
 - Training Model Accuracy: 72.2%
 - Test Data Accuracy: 70.4%
+- Precision Score: 68.2%
+- Recall Score: 85.3%
 - Optimized parameters are as follows
   1) Max Depth: 8
   2) Min samples per leaf: 9
   3) Min samples per split: 49
-- Do note that I only used small ranges for the grid search because it took extremely long to optimize when the ranges were the grid search were set very wide. Test data accuracy increased by ~7% after tuning the hyperparameters
+- Do note that I only used small ranges for the grid search because it took extremely long to optimize when the ranges were the grid search were set very wide. Test data accuracy increased by ~7% after tuning the hyperparameters. Also, recall score improved significantly (21%), which is good for this task set (lung cancer detection)
 
 ### Naive Bayes
 ### 1st iteration (No optimization)
 - Training Model Accuracy: 63.2%
 - Test Data Accuracy: 62.8%
+- Precision Score: 69.3%
+- Recall Score: 56.8%
 - My understanding of Naive Bayes is that it suffers from 1 critical flaw, which is the 'zero-frequency problem' where zero probability is assigned to a categorical variable whose category in the test data set was not available in the training dataset. Technically, this was very unlikely to happen because the distribution of categorical values were quite even and large. However, I did try out smoothing to see if it would help improve the accuracy of the training model.
 ### 2nd iteration (Optimization done)
 - Training Model Accuracy: 67.8%
 - Test Data Accuracy: 67.0%
+- Precision Score: 70.1%
+- Recall Score: 68.75%
 - Optimized parameters are as follows
   1) var_smoothing: 0.0006579332246575676
-- Even though Naive Bayes is easy to use, the lack of hyperparameters to tune does mean that it is difficult to improve the test data accuracy unless the training dataset is modified.
+- Even though Naive Bayes is easy to use, the lack of hyperparameters to tune does mean that it is difficult to improve the test data accuracy unless the training dataset is modified. Also, recall score performed relatively worse compared to decision trees.
 
 ### Random Forest Ensemble
 ### 1st iteration (No optimization)
 - Training Model Accuracy: 91.9%
 - Test Data Accuracy: 66.3%
+- Precision Score: 68.0%
+- Recall Score: 72.1%
 - Similar to decision trees, overfitting had likely occurred since training model accuracy was much higher than test data accuracy. and certain parameters (termed as hyperparameters) have to be tuned in order to reduce overfitting. The hyperparameters that can be tuned are similar to decision trees, but I tried out cross-validation.
 - My understanding of cross-validation is as follows. I do not fully understand why it is done, but it seems like cross-validation helps prevent cases where hyperparameter tuning is done too often using test set score accuracy as a reference that it indirectly starts to fit to the characteristics of the test set.
   1) The training set is split into k smaller sets (called folds)
@@ -121,15 +135,16 @@
 ### 2nd iteration (Optimization done)
 - Training Model Accuracy: 74.8%
 - Test Data Accuracy: 72.2%
+- Precision Score: 70.7%
+- Recall Score: 83.9%
 - Optimized parameters are as follows
   1) Max Depth: 10
   2) Min samples per leaf: 10
   3) number of trees in the forest: 10
-- Similar to decision trees, I played around with small ranges to optimize. Test data accuracy increased by ~7% after tuning the hyperparameters
+- Similar to decision trees, I played around with small ranges to optimize. Test data accuracy increased by ~7% after tuning the hyperparameters. Recall score also shot up significantly (+11.8%), similar to decision trees.
 
 ## Other Considerations
 - Due to time constraints, I did not explore other metrics that are used to evaluate the performance of these ML models.
-  1) Precision: The ratio of true positives to the sum of true positives and false positives. It measures the accuracy of the positive predictions.
-  2) Recall (Sensitivity or True Positive Rate): The ratio of true positives to the sum of true positives and false negatives. It measures the ability to capture all relevant instances.
-  3) F1 Score: The harmonic mean of precision and recall. It balances precision and recall.
-  4) Area Under the ROC Curve (AUC-ROC): A measure of the model's ability to distinguish between classes.
+  1) F1 Score: The harmonic mean of precision and recall.
+  ![alt text](<Screenshot 2024-03-04 at 6.22.29 PM.png>)
+  2) Area Under the ROC Curve (AUC-ROC): A measure of the model's ability to distinguish between classes.

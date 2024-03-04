@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
+from sklearn.metrics import precision_score, recall_score
 
 grid = {
     'n_estimators': [10, 25, 30, 50, 100, 200],  # Number of trees in the forest
@@ -27,6 +28,16 @@ def evaluate_model(model, X_train, y_train, X_test, y_test):
     test_accuracy = model.score(X_test, y_test)
     print(f"Training Model Accuracy: {training_accuracy}")
     print(f"Test Data Accuracy: {test_accuracy}")
+
+    # Predictions on test data
+    y_pred = model.predict(X_test)
+
+    # Calculate precision and recall scores
+    precision = precision_score(y_test, y_pred)
+    recall = recall_score(y_test, y_pred)
+
+    print(f"Precision Score: {precision}")
+    print(f"Recall Score: {recall}")
 
 
     # Plot the decision tree

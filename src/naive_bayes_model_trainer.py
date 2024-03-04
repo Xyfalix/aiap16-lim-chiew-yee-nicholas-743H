@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.model_selection import GridSearchCV
 from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import precision_score, recall_score
 
 def train_model(X_train, y_train):
     classifier = GaussianNB()
@@ -23,6 +24,16 @@ def evaluate_model(model, X_train, y_train, X_test, y_test):
     test_accuracy = model.score(X_test, y_test)
     print(f"Training Model Accuracy: {training_accuracy}")
     print(f"Test Data Accuracy: {test_accuracy}")
+
+    # Predictions on test data
+    y_pred = model.predict(X_test)
+
+    # Calculate precision and recall scores
+    precision = precision_score(y_test, y_pred)
+    recall = recall_score(y_test, y_pred)
+
+    print(f"Precision Score: {precision}")
+    print(f"Recall Score: {recall}")
 
     # Plot the decision tree
     # plt.figure(figsize=(15, 10))
