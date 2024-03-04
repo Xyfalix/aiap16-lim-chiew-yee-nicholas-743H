@@ -9,10 +9,14 @@ grid = {
 }
 
 def train_model(X_train, y_train):
-    rf_classifier = RandomForestClassifier(random_state=42, n_jobs=-1)
+    rf_classifier = RandomForestClassifier(random_state=42)
     gcv = GridSearchCV(estimator=rf_classifier, param_grid=grid, cv=4, n_jobs=-1, verbose=1, scoring="accuracy")
     gcv.fit(X_train, y_train)
-    print(gcv.best_score_)
+
+    # Retrieve the best parameters
+    best_params = gcv.best_params_
+    print("Best Parameters:", best_params)
+
     model_ = gcv.best_estimator_
     print(model_)
     optimized_model = model_.fit(X_train, y_train)

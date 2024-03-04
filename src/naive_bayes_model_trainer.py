@@ -8,6 +8,11 @@ def train_model(X_train, y_train):
     params_NB = {'var_smoothing': np.logspace(0,-9, num=100)}
     gcv = GridSearchCV(estimator=classifier, param_grid=params_NB)
     gcv.fit(X_train, y_train)
+
+     # Retrieve the best parameters
+    best_params = gcv.best_params_
+    print("Best Parameters:", best_params)
+
     model_ = gcv.best_estimator_
     optimized_model = model_.fit(X_train, y_train)
     return optimized_model

@@ -5,6 +5,8 @@ import pandas as pd
 import numpy as np
 
 def preprocess_data(data):
+    print("Preprocessor is running")
+
     # drop duplicate Patient ID entries
     data.drop_duplicates(subset=['ID'], inplace=True)
 
@@ -49,8 +51,6 @@ def preprocess_data(data):
     columns_to_drop = ["Lung Cancer Occurrence", "ID", "Age", "Last Weight", "Current Weight", "Start Smoking", "Stop Smoking", "Frequency of Tiredness", "Dominant Hand"]
     X = data.drop(columns_to_drop, axis=1, inplace=False)
     y = data["Lung Cancer Occurrence"]
-
-    print("This is the cleaned up data")
     
     label_encoder = LabelEncoder()
 
@@ -63,7 +63,7 @@ def preprocess_data(data):
     # convert true false values to boolean
     X = X.astype(int)
 
-    all_columns = X.columns.tolist()
+    # all_columns = X.columns.tolist()
 
     # Display the list of columns
     # print(all_columns)
