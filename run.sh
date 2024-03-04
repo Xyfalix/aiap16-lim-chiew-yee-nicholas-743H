@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Uncomment the command in line 4 and run in terminal to provide execute permissions to the script
+# chmod +x run.sh
+
 # Check if the user provided a model argument
 if [ -z "$1" ]; then
     echo "Usage: $0 <model>"
