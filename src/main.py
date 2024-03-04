@@ -1,8 +1,9 @@
 from config import Config
 from data_loader import load_data
 from preprocessor import preprocess_data
-from naive_bayes_model_trainer import train_model, evaluate_model
+# from naive_bayes_model_trainer import train_model, evaluate_model
 # from decision_tree_model_trainer import train_model, evaluate_model
+from random_forest_model_trainer import train_model, evaluate_model
 import joblib
 
 def main():
