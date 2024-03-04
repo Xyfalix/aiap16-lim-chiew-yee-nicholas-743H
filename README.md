@@ -146,5 +146,7 @@ The models are evaluated based on the following criteria
 ## Other Considerations
 - Due to time constraints, I did not explore other metrics that are used to evaluate the performance of these ML models.
   1) F1 Score: The harmonic mean of precision and recall.
-  ![alt text](<Screenshot 2024-03-04 at 6.22.29 PM.png>)
+     
+  <img src="Screenshot 2024-03-04 at 6.22.29 PM.png" alt="alt text" width="300"/>
+  
   2) Area Under the ROC Curve (AUC-ROC): A measure of the model's ability to distinguish between classes.
