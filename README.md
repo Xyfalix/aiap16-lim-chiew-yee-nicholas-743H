@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-1. [Name & Email](#Name-&-Email)
+1. [Name and Email](#Name-and-Email)
 2. [Folder Structure Overview](#Folder-Structure-Overview)
 3. [Pipeline Execution Instructions](#Pipeline-Execution-Instructions)
 4. [Pipeline Flow Description](#Pipeline-Flow-Description)
@@ -11,7 +11,7 @@
 7. [Evaluation of Models](#Evaluation-of-Models)
 8. [Other Considerations](#Other-Considerations)
    
-## Name & Email
+## Name and Email
 
 - Name: Lim Chiew Yee Nicholas
 - Email: nicklimcy90@gmail.com
