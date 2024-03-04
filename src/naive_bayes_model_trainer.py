@@ -1,18 +1,17 @@
 import matplotlib.pyplot as plt
-from sklearn.tree import DecisionTreeClassifier, plot_tree
+import numpy as np
 from sklearn.model_selection import GridSearchCV
-
-grid = {'max_depth': range(10, 40), # controls the max depth of the decision tree
-         'min_samples_split': range(200, 220), # min no. of samples in partition before split
-         'min_samples_leaf': [1]} # min no. of samples in leaf node.
+from sklearn.naive_bayes import GaussianNB
 
 def train_model(X_train, y_train):
-    classifier = DecisionTreeClassifier(random_state=42)
-    gcv = GridSearchCV(estimator=classifier, param_grid=grid)
+    classifier = GaussianNB()
+    params_NB = {'var_smoothing': np.logspace(0,-9, num=100)}
+    gcv = GridSearchCV(estimator=classifier, param_grid=params_NB)
     gcv.fit(X_train, y_train)
     model_ = gcv.best_estimator_
     optimized_model = model_.fit(X_train, y_train)
     return optimized_model
+
 
 def evaluate_model(model, X_train, y_train, X_test, y_test):
     training_accuracy = model.score(X_train, y_train)
